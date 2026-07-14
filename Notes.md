@@ -172,3 +172,23 @@ Expense Tracker MCP server se we can add and track our expenses. It will be inte
 2. To degub we use a tool called mcp inspector. Run command *uv run fastmcp dev inspector main.py* (NOTE - Changed). It will start a behind the scene server. This works like postman for API testing but for mcp. To run use *uv run fastmcp run main.py*. Now after it is started, all the clients can connect to it. Since we current we do not have a custom client, we will simply write command to install it in claude desktop *uv run fastmcp install claude-desktop main.py* (NOTE - if shows not found use uv run fastmcp install claude-desktop main.py --config-path "<actual path of config file>" --name "<optional:can give any name>", also replace uv in config file it absolute path of uv)
 
 ## Flow of Expense Tracker mcp server-
+1. Tools required - Add expense, list expense, summarize (optional edit expense, delete expense).
+2. We will use a DB of sqlite stored in project folder (only for testing purpose)
+
+### FastMCP & FastAPI
+1. Both are highly compatible.
+2. FastMCP is based form FastAPI.
+3. Highly Similar.
+4. We can directly convert FastAPI to FastMCP server using from_fastapi function
+"""
+form fastmcp import FastMCP
+from main import app # Import fast api app
+
+mcp = FastMCP.from_fastapi(
+  app = app,
+  name="Expense Tracker Server",
+)
+
+if __ name__ == "__main__":
+    mcp.run()
+"""
