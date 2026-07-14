@@ -155,5 +155,20 @@ The reason why connectors are not always used because - Connectors are **officia
 
 * We can add titter, gogle drive , manim, filesystem, etc MCP server tools to our Claude desktop.
 
-## Local MCP Server
-Expense Tracker MCP server
+## Expense Tracker MCP Server
+Expense Tracker MCP server se we can add and track our expenses. It will be integrated with claude desktop.
+
+### Plan of action
+  - Demo Calculator server
+  - build expense local server
+  - Improve and deploy to make it remote server
+
+* We use 2 popular libries for MCP , MCP SDK (official python SDK and it has 3 sublibries mcp.server, mcp.client and mcp.cli (for debugging and testing)) and FastMCP (abstraction on MCP SDK and created by prefect, this is beginner friendly and easy to use, later it is adopted by MCP SDK). These is new fastmcp version 2.0 which breaks out from MSC SDK and it is standlone , community-driven and fastevolving lib. We will use fastmcp.
+
+* uv - a new package manage (instad of pip) which is fast and better.
+
+## Flow of Simple calculator with dice roll mcp local server-
+1. We use @mcp.tool decorator to make a simple python function into a mcp server.
+2. To degub we use a tool called mcp inspector. Run command *uv run fastmcp dev inspector main.py* (NOTE - Changed). It will start a behind the scene server. This works like postman for API testing but for mcp. To run use *uv run fastmcp run main.py*. Now after it is started, all the clients can connect to it. Since we current we do not have a custom client, we will simply write command to install it in claude desktop *uv run fastmcp install claude-desktop main.py* (NOTE - if shows not found use uv run fastmcp install claude-desktop main.py --config-path "<actual path of config file>" --name "<optional:can give any name>", also replace uv in config file it absolute path of uv)
+
+## Flow of Expense Tracker mcp server-
