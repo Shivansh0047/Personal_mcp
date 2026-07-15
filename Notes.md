@@ -192,3 +192,12 @@ mcp = FastMCP.from_fastapi(
 if __ name__ == "__main__":
     mcp.run()
 """
+
+## Flow of Remote MCP Servers
+They can serve multiple clients and are powerful, however they are slow compared to local MCP server.
+
+* from code point of view, a local and ramote mcp server are almost same.
+
+We will we deploy our MCP server on fastmcp cloud.
+
+To test server use *fastmcp run main.py --transport http --host 0.0.0.0 --port 8001* or *uv run main.py*, also call inspector select proper endpoint (make sure server is running as well).
