@@ -231,3 +231,5 @@ There are multiple libries which are available mcp lib , fastmcp or LangChain MC
 ### MCP Chatbot as MCP Client
 
 we will connect MCP server with calculator (local) and expense_tracker (remote) mcp servers.
+
+NOTE - earlier the Fastmcp.clound was free but now it is hosted by horizon and adding a remote server to a custom client requires developer tier

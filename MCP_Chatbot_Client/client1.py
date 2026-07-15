@@ -1,5 +1,6 @@
 import asyncio
 from langchain_mcp_adapters.client import MultiServerMCPClient # Because we will connect our client with multiple servers
+from fastmcp.client.auth import OAuth # Handles the OAuth browser login + token caching for the expense server
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import ToolMessage
@@ -18,7 +19,16 @@ SERVERS = {
             "run",
             r"D:\Coding\AL_ML\MCP\Simple_Calculator_with_Dice_Roll_Local_MCP_Server\main.py",
         ],
-    }
+    },
+    # "expense":{
+    #     "transport": "streamable_http", # or sse
+    #     "url":"https://expense-tracker-shiv0047.fastmcp.app/mcp",
+    #     "auth": OAuth(mcp_url="https://expense-tracker-shiv0047.fastmcp.app/mcp"), # opens browser on first run, caches token after
+    # }
+    # ^ commented out for now — OAuth token exchange gets rejected (401 unauthorized)
+    # on the free/Personal FastMCP Cloud plan; needs a higher tier (Developer/Enterprise)
+    # that includes "Access user seats" for external OAuth clients to consume this server.
+    # Re-enable once the plan is upgraded, or once you confirm with FastMCP Cloud support.
 }
 
 async def main():
@@ -28,6 +38,8 @@ async def main():
     named_tool = {}
     for tool in tools:
         named_tool[tool.name] = tool
+
+    print("Available tools: ", named_tool.keys()) # List of available tools
 
     llm = ChatGoogleGenerativeAI( #LLM
         model="gemini-2.5-flash",
