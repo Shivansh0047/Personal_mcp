@@ -1,6 +1,7 @@
 from fastmcp import FastMCP
 import os
 import sqlite3
+import json
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "expenses.db")
 CATEGORIES_PATH = os.path.join(os.path.dirname(__file__), "categories.json") # The category has list of categories and subcategories
@@ -77,6 +78,18 @@ def categories():
     with open(CATEGORIES_PATH, "r", encoding="utf-8") as f:
         return f.read()
 
+@mcp.resource("infp://server")
+def server_info() -> str:
+    """Get information about this server"""
+    info = {
+        "name": "Expense Tracker MCP Server",
+        "version": "1.0.0",
+        "description": "A basic MCP server for tracking expenses",
+        "tools":["list_expenses","add_expense","summarize"],
+        "author":"Shivansh Pandey"
+    }
+    return json.dumps(info, indent=2)
+
 @mcp.tool()
 def get_categories():
     '''Return the list of valid categories and subcategories.'''
@@ -84,4 +97,5 @@ def get_categories():
         return f.read()
 
 if __name__ == "__main__":
-    mcp.run()
+    # mcp.run()
+    mcp.run(transport="http", host="0.0.0.0", port=8000)

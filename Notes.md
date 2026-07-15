@@ -201,3 +201,6 @@ They can serve multiple clients and are powerful, however they are slow compared
 We will we deploy our MCP server on fastmcp cloud.
 
 To test server use *fastmcp run main.py --transport http --host 0.0.0.0 --port 8001* or *uv run main.py*, also call inspector select proper endpoint (make sure server is running as well).
+
+## Flow of Remote Expense Tracker MCP Servers
+1. Change thr code for remote deployment.
