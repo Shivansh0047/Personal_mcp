@@ -1,14 +1,24 @@
 import asyncio
+from pathlib import Path # For building a relative path that works regardless of cwd
 from langchain_mcp_adapters.client import MultiServerMCPClient # Because we will connect our client with multiple servers
 from fastmcp.client.auth import OAuth # Handles the OAuth browser login + token caching for the expense server
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import ToolMessage
-
+ 
 load_dotenv()
-
+ 
+# Resolve the calculator server path relative to this file's location,
+# so it works no matter where the script is run from.
+# client1.py is in .../MCP/MCP_Chatbot_Client/, calculator is a sibling folder in .../MCP/
+CALCULATOR_PATH = (
+    Path(__file__).resolve().parent.parent
+    / "Simple_Calculator_with_Dice_Roll_Local_MCP_Server"
+    / "main.py"
+)
+ 
 # Config of server which we want to connect with
-
+ 
 SERVERS = {
     "Calculator": {
         "transport": "stdio",
@@ -17,7 +27,7 @@ SERVERS = {
             "run",
             "fastmcp",
             "run",
-            r"D:\Coding\AL_ML\MCP\Simple_Calculator_with_Dice_Roll_Local_MCP_Server\main.py",
+            str(CALCULATOR_PATH), # relative-safe path, resolved above
         ],
     },
     # "expense":{
