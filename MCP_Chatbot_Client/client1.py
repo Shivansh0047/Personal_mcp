@@ -32,32 +32,39 @@ async def main():
     llm = ChatGoogleGenerativeAI( #LLM
         model="gemini-2.5-flash",
         temperature=0,
-        )
-    
+    )
+
     llm_with_tools = llm.bind_tools(tools) # Bind tools with LLM
 
-    prompt = "What is the product of 12 and 15 using the math tool" # Prompt that forces use of tool
-    response = await llm_with_tools.ainvoke(prompt)
+    prompt = "What is the product of 12 and 15 using the math tool, add 2 to the result using tool as well" # Prompt that forces use of tool
 
-    if not getattr(response, "tool_calls", None): # If no tool is needed
-        print("\nLLM Reply:", response.content)
-        return
+    messages = [prompt]
 
-    print("Response: ", response) # has LLM calls tools (not use it)
+    while True:
 
-    selected_tool = response.tool_calls[0]["name"] # name of tool to use
-    selected_tool_args = response.tool_calls[0]["args"] # arguments of tool to use
-    tool_call_id = response.tool_calls[0]["id"] # Id of selected tool
+        response = await llm_with_tools.ainvoke(messages)
+        messages.append(response)
 
-    tool_result = await named_tool[selected_tool].ainvoke(selected_tool_args) # Select tool and pass its args
+        if not getattr(response, "tool_calls", None): # If no tool is needed
+            print("\nLLM Reply:", response.content)
+            break
 
-    print(tool_result)
+        print("Response: ", response) # has LLM calls tools (not use it)
 
-    tool_message = ToolMessage(content=tool_result,tool_call_id=tool_call_id,) # Create toll message
+        for tc in response.tool_calls:
+            selected_tool = tc["name"] # name of tool to use
+            selected_tool_args = tc.get("args") or {} # arguments of tool to use
+            tool_call_id = tc["id"] # Id of selected tool
 
-    final_response = await llm_with_tools.ainvoke([prompt, response, tool_message]) # Pass entire history
+            print(f"\nExecuting remote tool: {selected_tool}")
+            tool_result = await named_tool[selected_tool].ainvoke(selected_tool_args) # Select tool and pass its args
 
-    print(final_response.content)
+            tool_message = ToolMessage(
+                content=str(tool_result),
+                tool_call_id=tool_call_id,
+            ) # Create tool message
+
+            messages.append(tool_message)
 
 if __name__ == '__main__':
     asyncio.run(main()) # Run async main functions
