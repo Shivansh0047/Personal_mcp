@@ -204,3 +204,5 @@ To test server use *fastmcp run main.py --transport http --host 0.0.0.0 --port 8
 
 ## Flow of Remote Expense Tracker MCP Servers
 1. Change thr code for remote deployment.
+2. Fix the DB read only issue
+3. Here a problem is that the entire DB is Sync, it will process rejuents sequentially. So we will convert all our tools and our DB as async.
