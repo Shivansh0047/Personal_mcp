@@ -206,3 +206,20 @@ To test server use *fastmcp run main.py --transport http --host 0.0.0.0 --port 8
 1. Change thr code for remote deployment.
 2. Fix the DB read only issue
 3. Here a problem is that the entire DB is Sync, it will process rejuents sequentially. So we will convert all our tools and our DB as async.
+
+## Proxy Server
+if we cant conncent our server with claude directly, we can use proxy server. With will act in between connector and Remotemcp server. This is slower than usual. code - 
+"""
+from fastmcp import FastMCP
+
+#Create a proxy to your remote FastMCP Cloud server
+#FastMCP Cloud uses Streamable HTTP (default), so just use the /mcp URL
+mcp = FastMCP.as_proxy(
+    "https://expense-tracker-shiv0047.fastmcp.app/mcp",  # Standard FastMCP Cloud URL
+    name="Expense Tracker Server Proxy"
+)
+
+if __name__ == "__main__":
+    # This runs via STDIO, which Claude Desktop can connect to
+    mcp.run()
+"""
