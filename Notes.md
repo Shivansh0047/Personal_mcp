@@ -223,3 +223,11 @@ if __name__ == "__main__":
     # This runs via STDIO, which Claude Desktop can connect to
     mcp.run()
 """
+
+## MCP Clients
+
+There are multiple libries which are available mcp lib , fastmcp or LangChain MCP Adapters (the one we will use).
+
+### MCP Chatbot as MCP Client
+
+we will connect MCP server with calculator (local) and expense_tracker (remote) mcp servers.
