@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "system-monitor-mcp"
+version = "0.1.0"
+description = "MCP server for CPU, RAM, disk, process, and log monitoring"
+requires-python = ">=3.10"
+
+dependencies = [
+    "fastmcp>=2.0",      # The MCP framework
+    "psutil>=6.0",       # System stats: CPU, RAM, disk, processes
+]
+
+[project.scripts]
+system-monitor = "system_monitor.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/system_monitor"]
