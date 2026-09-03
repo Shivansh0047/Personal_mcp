@@ -24,13 +24,13 @@ Projects range from simple examples to more feature-rich applications involving 
 
 **Comprehensive system‑monitoring suite**  
 - Real‑time CPU statistics: overall usage, per‑core percentages, core counts, current/min/max frequency, timestamped results  
-- Detailed RAM and swap usage: total, used, available in GB, percentage used, timestamped results  
-- Disk usage inspection: per‑path totals, free space, usage percentage, full partition enumeration, timestamped results  
-- Process enumeration: list of running processes with PID, name, status, memory % , CPU % , username, start time; sortable by memory, CPU or name; limitable to avoid context overload, timestamped results  
+- Detailed RAM and swap usage: total, used, available in GB, percentage used, timestamped results  
+- Disk usage inspection: per‑path totals, free space, usage percentage, full‑partition enumeration, timestamped results  
+- Process enumeration: list of running processes with PID, name, status, memory %, CPU %, username, start time; sortable by memory, CPU or name; limitable to avoid context overload, timestamped results  
 - Process search: case‑insensitive partial name matching, returns matching processes with command line and start time, timestamped results  
 - Log file handling: safe discovery of `.log` and `.txt` files, size‑aware reading of recent lines, optional level filtering, timestamped results  
 - Log analysis: automatic counting of errors and warnings, identification of most frequent error messages, recent error/warning excerpts, size checks, timestamped results  
-- Anomaly detection: health check that evaluates CPU, RAM, swap, disk usage and top resource‑hogs, produces a health score (0‑100), status badge, prioritized criticals/warnings/info, summary and timestamp  
+- Anomaly detection: evaluates CPU, RAM, swap, disk usage and top resource‑hog processes, produces a numeric health score (0‑100), a textual health status (Healthy / Degraded / Critical), prioritized lists of criticals, warnings and informational messages, a concise summary, and a `sampled_at` ISO‑8601 timestamp  
 
 - Utilizes **psutil** for cross‑platform system metrics  
 - All tool outputs include a `sampled_at` ISO‑8601 timestamp for traceability
@@ -127,19 +127,14 @@ uv run script.py
 
 ## Technologies Used
 
-- Python  
-- Model Context Protocol (MCP)  
-- FastMCP  
-- psutil (cross‑platform system and process utilities)  
-- datetime (standard library for timestamps)  
-- pathlib (filesystem path handling)  
-- re (regular‑expression utilities)  
-- os (operating‑system interfaces)  
-- collections (e.g., Counter for log analysis)  
-- SQLite  
-- JSON  
-- uv  
-- asyncio
+- Python
+- Model Context Protocol (MCP)
+- FastMCP
+- SQLite
+- JSON
+- uv
+- asyncio  
+---
 
 ## Purpose
 

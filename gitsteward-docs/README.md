@@ -4,9 +4,9 @@ Auto-generated summary of every README section GitSteward has flagged.
 
 ## Features (#features)
 Status: updated
-Commit: 0f7ce09
-Updated: 2026-09-03T16:51:45+00:00
-Summary: system_monitor_mcp_server/src/system_monitor/server.py: Several new monitoring tools (CPU, RAM, disk, process, log analysis, anomaly detection) are introduced but not reflected in the feature list.
+Commit: e3d5300
+Updated: 2026-09-03T17:15:24+00:00
+Summary: system_monitor_mcp_server/src/system_monitor/tools/anomalies.py: mentions a status badge which the new anomaly detection tool does not provide
 
 ## Installation (#installation)
 Status: updated
