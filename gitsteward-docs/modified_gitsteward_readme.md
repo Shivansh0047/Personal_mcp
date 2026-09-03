@@ -13,46 +13,48 @@ Projects range from simple examples to more feature-rich applications involving 
 
 ## Features
 
-- Multiple independent MCP projects
-- Built with Python
-- Managed using **uv**
-- FastMCP-based servers
-- SQLite database integration
-- AI-friendly tool interfaces
-- Modular and extensible project structure
+- Multiple independent MCP projects  
+- Built with Python  
+- Managed using **uv**  
+- FastMCP‑based server exposing a rich set of system‑monitoring tools  
+- SQLite database integration for MCP state persistence  
+- AI‑friendly tool interfaces that can be invoked by language models  
+- Modular and extensible project structure  
 - Easy to add new MCP servers and tools  
----
+
+**Comprehensive system‑monitoring suite**  
+- Real‑time CPU statistics: overall usage, per‑core percentages, core counts, current/min/max frequency, timestamped results  
+- Detailed RAM and swap usage: total, used, available in GB, percentage used, timestamped results  
+- Disk usage inspection: per‑path totals, free space, usage percentage, full partition enumeration, timestamped results  
+- Process enumeration: list of running processes with PID, name, status, memory % , CPU % , username, start time; sortable by memory, CPU or name; limitable to avoid context overload, timestamped results  
+- Process search: case‑insensitive partial name matching, returns matching processes with command line and start time, timestamped results  
+- Log file handling: safe discovery of `.log` and `.txt` files, size‑aware reading of recent lines, optional level filtering, timestamped results  
+- Log analysis: automatic counting of errors and warnings, identification of most frequent error messages, recent error/warning excerpts, size checks, timestamped results  
+- Anomaly detection: health check that evaluates CPU, RAM, swap, disk usage and top resource‑hogs, produces a health score (0‑100), status badge, prioritized criticals/warnings/info, summary and timestamp  
+
+- Utilizes **psutil** for cross‑platform system metrics  
+- All tool outputs include a `sampled_at` ISO‑8601 timestamp for traceability
 
 ## Repository Structure
 
-system_monitor_mcp_server/
-│
-├── src/
-│   └── system_monitor/
-│       ├── __init__.py
-│       ├── server.py          # entry point for the MCP server (exposes `main`)
-│       └── …                  # additional modules implementing monitoring logic
-│
-├── tests/
-│   └── …                      # test suite for the package
-│
-├── pyproject.toml             # build configuration, dependencies and console script
-├── uv.lock                    # lock file for reproducible installs
-├── README.md                  # overview, usage instructions and contribution guide
-└── .gitignore                 # standard ignore patterns
 ```text
-Each project is now a self‑contained Python package following the conventional
-`src/` layout. The `pyproject.toml` lives inside the top‑level
-`system_monitor_mcp_server` directory and defines:
-
-- Build system (hatchling)
-- Project metadata (name, version, description, Python requirement)
-- Runtime dependencies (`fastmcp`, `psutil`)
-- Console script entry point `system-monitor` → `system_monitor.server:main`
-
-All source code resides under `src/system_monitor`, while tests are placed in
-`tests/`. The repository also includes a lock file (`uv.lock`) for deterministic
-dependency resolution and a README with usage details.
+Personal_mcp/
+│
+├── Project_1/
+├── Project_2/
+├── Project_3/
+│
+├── pyproject.toml
+├── uv.lock
+└── README.md
+```  
+Each project is self-contained and may include its own:  
+- MCP server
+- Database
+- Configuration files
+- Tool implementations
+- Documentation  
+---
 
 ## Requirements
 
@@ -74,24 +76,16 @@ Clone the repository:
 ```bash
 git clone https://github.com/Shivansh0047/Personal_mcp.git
 ```  
-
-Enter the directory that contains the project definition:  
+Navigate into the project:  
 ```bash
-cd Personal_mcp/system_monitor_mcp_server
+cd Personal_mcp
 ```  
-
-Install the project's dependencies (this will also create a virtual environment if one does not already exist):  
+Install all dependencies:  
 ```bash
 uv sync
 ```  
-
-The `uv sync` command reads the `pyproject.toml` located in this folder, resolves the required packages, and installs them into the newly‑created environment. After the sync completes you can run the server directly via the installed console script:
-
-```bash
-system-monitor
-```  
-
-(If you prefer a classic `pip` workflow, you can also install the package in editable mode with `pip install -e .` after activating a virtual environment.)
+This command automatically creates a virtual environment (if needed) and installs all required packages.  
+---
 
 ## Running a Project
 
@@ -133,14 +127,19 @@ uv run script.py
 
 ## Technologies Used
 
-- Python
-- Model Context Protocol (MCP)
-- FastMCP
-- SQLite
-- JSON
-- uv
-- asyncio  
----
+- Python  
+- Model Context Protocol (MCP)  
+- FastMCP  
+- psutil (cross‑platform system and process utilities)  
+- datetime (standard library for timestamps)  
+- pathlib (filesystem path handling)  
+- re (regular‑expression utilities)  
+- os (operating‑system interfaces)  
+- collections (e.g., Counter for log analysis)  
+- SQLite  
+- JSON  
+- uv  
+- asyncio
 
 ## Purpose
 
