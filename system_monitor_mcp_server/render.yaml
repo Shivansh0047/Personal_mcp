@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: system-monitor-mcp
+    runtime: python
+    rootDir: system_monitor_mcp_server
+    buildCommand: pip install -e .
+    startCommand: python src/system_monitor/server.py
+    envVars:
+      - key: MCP_TRANSPORT
+        value: http
+      - key: PORT
+        value: 8000
