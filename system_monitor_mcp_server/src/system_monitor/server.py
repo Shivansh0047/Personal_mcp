@@ -1,7 +1,9 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastmcp import FastMCP
 from system_monitor.tools import register_all
 import os
-
 
 mcp = FastMCP(
     name = "System Monitor",

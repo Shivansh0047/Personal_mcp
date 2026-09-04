@@ -11,6 +11,7 @@ requires-python = ">=3.10"
 dependencies = [
     "fastmcp>=2.0",      # The MCP framework
     "psutil>=6.0",       # System stats: CPU, RAM, disk, processes
+    "python-dotenv>=1.0",
 ]
 
 [project.scripts]
