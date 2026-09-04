@@ -10,15 +10,15 @@ Summary: system_monitor_mcp_server/README.md: The added README omits the about s
 
 ## Features (#features)
 Status: updated
-Commit: 86a1ff1
-Updated: 2026-09-04T09:47:21+00:00
-Summary: system_monitor_mcp_server/README.md: The README was replaced with a new minimal version, removing the detailed features section.
+Commit: 04aab86
+Updated: 2026-09-04T10:17:01+00:00
+Summary: README.md: The "Features" section was deleted from the README, making the previous description outdated.
 
 ## Installation (#installation)
 Status: updated
-Commit: b0a19e0
-Updated: 2026-09-04T10:07:01+00:00
-Summary: system_monitor_mcp_server/src/system_monitor/server.py: The server now imports python‑dotenv, but the installation instructions don’t mention installing this dependency or setting up a .env file.
+Commit: 04aab86
+Updated: 2026-09-04T10:17:01+00:00
+Summary: README.md: The README no longer includes the detailed .env setup and uv‑specific steps; installation now uses generic git clone and pip install.
 
 ## Personal Mcp (#personal-mcp)
 Status: updated
@@ -28,9 +28,9 @@ Summary: system_monitor_mcp_server/README.md: The personal‑mcp overview was el
 
 ## Purpose (#purpose)
 Status: updated
-Commit: 86a1ff1
-Updated: 2026-09-04T09:47:21+00:00
-Summary: system_monitor_mcp_server/README.md: The new README no longer includes the purpose description, making it stale.
+Commit: 04aab86
+Updated: 2026-09-04T10:17:01+00:00
+Summary: README.md: The original "Purpose" section was removed from the README in the diff.
 
 ## Repository Structure (#repository-structure)
 Status: updated
