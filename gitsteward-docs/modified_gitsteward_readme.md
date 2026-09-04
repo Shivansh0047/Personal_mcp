@@ -13,27 +13,15 @@ Projects range from simple examples to more feature-rich applications involving 
 
 ## Features
 
-- Multiple independent MCP projects  
-- Built with Python  
-- Managed using **uv**  
-- FastMCP‑based server exposing a rich set of system‑monitoring tools  
-- SQLite database integration for MCP state persistence  
-- AI‑friendly tool interfaces that can be invoked by language models  
-- Modular and extensible project structure  
+- Multiple independent MCP projects
+- Built with Python
+- Managed using **uv**
+- FastMCP-based servers
+- SQLite database integration
+- AI-friendly tool interfaces
+- Modular and extensible project structure
 - Easy to add new MCP servers and tools  
-
-**Comprehensive system‑monitoring suite**  
-- Real‑time CPU statistics: overall usage, per‑core percentages, core counts, current/min/max frequency, timestamped results  
-- Detailed RAM and swap usage: total, used, available in GB, percentage used, timestamped results  
-- Disk usage inspection: per‑path totals, free space, usage percentage, full‑partition enumeration, timestamped results  
-- Process enumeration: list of running processes with PID, name, status, memory %, CPU %, username, start time; sortable by memory, CPU or name; limitable to avoid context overload, timestamped results  
-- Process search: case‑insensitive partial name matching, returns matching processes with command line and start time, timestamped results  
-- Log file handling: safe discovery of `.log` and `.txt` files, size‑aware reading of recent lines, optional level filtering, timestamped results  
-- Log analysis: automatic counting of errors and warnings, identification of most frequent error messages, recent error/warning excerpts, size checks, timestamped results  
-- Anomaly detection: evaluates CPU, RAM, swap, disk usage and top resource‑hog processes, produces a numeric health score (0‑100), a textual health status (Healthy / Degraded / Critical), prioritized lists of criticals, warnings and informational messages, a concise summary, and a `sampled_at` ISO‑8601 timestamp  
-
-- Utilizes **psutil** for cross‑platform system metrics  
-- All tool outputs include a `sampled_at` ISO‑8601 timestamp for traceability
+---
 
 ## Repository Structure
 
@@ -76,16 +64,36 @@ Clone the repository:
 ```bash
 git clone https://github.com/Shivansh0047/Personal_mcp.git
 ```  
-Navigate into the project:  
+
+Enter the directory that contains the server code:  
 ```bash
-cd Personal_mcp
+cd Personal_mcp/system_monitor_mcp_server
 ```  
-Install all dependencies:  
+
+(Optional) Create and activate a virtual environment so the installation does not affect your global Python installation:  
 ```bash
-uv sync
+python -m venv .venv
+source .venv/bin/activate   # on Windows: .venv\Scripts\activate
 ```  
-This command automatically creates a virtual environment (if needed) and installs all required packages.  
----
+
+Install the package in editable mode, which also pulls in the new **python‑dotenv** dependency declared in `pyproject.toml`:  
+```bash
+pip install -e .
+```  
+
+If you need to provide configuration values (e.g., custom FastMCP host or port), create a `.env` file in the project root and add the required variables, for example:  
+```dotenv
+FASTMCP_HOST=0.0.0.0
+FASTMCP_PORT=8000
+```  
+The server automatically loads this file at startup via `python‑dotenv`. If no `.env` file is present, default settings are used.
+
+Run the server locally:  
+```bash
+python src/system_monitor/server.py
+```  
+
+These steps install all current dependencies, optionally allow you to override configuration through a `.env` file, and start the FastMCP‑based system‑monitoring server that provides CPU, RAM, disk, process, and log monitoring APIs.
 
 ## Running a Project
 
@@ -127,14 +135,20 @@ uv run script.py
 
 ## Technologies Used
 
-- Python
-- Model Context Protocol (MCP)
-- FastMCP
-- SQLite
-- JSON
-- uv
-- asyncio  
----
+- Python (3.10+)  
+- Model Context Protocol (MCP)  
+- FastMCP  
+- psutil (cross‑platform system and process utilities)  
+- python‑dotenv (loads environment variables from `.env` files)  
+- datetime (standard library for timestamps)  
+- pathlib (filesystem path handling)  
+- re (regular‑expression utilities)  
+- os (operating‑system interfaces)  
+- collections (e.g., Counter for log analysis)  
+- SQLite (via the built‑in sqlite3 module)  
+- JSON (standard library serialization)  
+- uv (asynchronous server runtime)  
+- asyncio (standard library for asynchronous programming)
 
 ## Purpose
 
