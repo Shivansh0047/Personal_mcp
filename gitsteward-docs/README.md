@@ -16,9 +16,9 @@ Summary: system_monitor_mcp_server/README.md: The README was replaced with a new
 
 ## Installation (#installation)
 Status: updated
-Commit: 86a1ff1
-Updated: 2026-09-04T09:47:21+00:00
-Summary: system_monitor_mcp_server/README.md: Installation instructions were removed in the new README.
+Commit: b0a19e0
+Updated: 2026-09-04T10:07:01+00:00
+Summary: system_monitor_mcp_server/src/system_monitor/server.py: The server now imports python‑dotenv, but the installation instructions don’t mention installing this dependency or setting up a .env file.
 
 ## Personal Mcp (#personal-mcp)
 Status: updated
@@ -40,7 +40,7 @@ Summary: system_monitor_mcp_server/README.md: The repository‑structure diagram
 
 ## Technologies Used (#technologies-used)
 Status: updated
-Commit: 0f7ce09
-Updated: 2026-09-03T16:51:45+00:00
-Summary: system_monitor_mcp_server/src/system_monitor/server.py: The new code adds a dependency on the `psutil` library, which is not listed.
+Commit: b0a19e0
+Updated: 2026-09-04T10:07:01+00:00
+Summary: system_monitor_mcp_server/pyproject.toml: The new runtime dependency python-dotenv is not listed among the technologies. / system_monitor_mcp_server/src/system_monitor/server.py: The added `dotenv` import should be reflected in the technologies list, which currently omits it.
 
