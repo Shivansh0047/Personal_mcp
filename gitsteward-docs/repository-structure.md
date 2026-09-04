@@ -1,36 +1,41 @@
 ---
 source_anchor: "README.md#repository-structure"
-source_commit: "397b112f70b30ca0bd4ec90210908ecf2c016f20"
+source_commit: "86a1ff1e2b52118b55942dd654bf05bf6fb6cc98"
 status: "updated"
 ---
 
-**Why flagged:** system_monitor_mcp_server/pyproject.toml: pyproject.toml is now located inside a subdirectory rather than at the repository root as depicted
+**Why flagged:** system_monitor_mcp_server/README.md: The repository‑structure diagram is absent from the newly added README.
 
 system_monitor_mcp_server/
 │
 ├── src/
 │   └── system_monitor/
-│       ├── __init__.py
-│       ├── server.py          # entry point for the MCP server (exposes `main`)
-│       └── …                  # additional modules implementing monitoring logic
+│       ├── __init__.py               # makes `system_monitor` a package
+│       ├── server.py                 # entry point for the MCP server (exposes `main`)
+│       └── …                         # additional modules that implement the monitoring logic
 │
 ├── tests/
-│   └── …                      # test suite for the package
+│   └── …                             # test suite for the package
 │
-├── pyproject.toml             # build configuration, dependencies and console script
-├── uv.lock                    # lock file for reproducible installs
-├── README.md                  # overview, usage instructions and contribution guide
-└── .gitignore                 # standard ignore patterns
-```text
-Each project is now a self‑contained Python package following the conventional
-`src/` layout. The `pyproject.toml` lives inside the top‑level
-`system_monitor_mcp_server` directory and defines:
+├── pyproject.toml                    # build configuration, project metadata, runtime dependencies and console‑script entry point
+├── uv.lock                           # lock file for deterministic dependency resolution
+├── README.md                         # short overview, list of available monitoring tools and local‑run instructions
+└── .gitignore                        # standard ignore patterns
 
-- Build system (hatchling)
-- Project metadata (name, version, description, Python requirement)
-- Runtime dependencies (`fastmcp`, `psutil`)
-- Console script entry point `system-monitor` → `system_monitor.server:main`
+**Key points**
 
-All source code resides under `src/system_monitor`, while tests are placed in
-`tests/`. The repository also includes a lock file (`uv.lock`) for deterministic
-dependency resolution and a README with usage details.
+* The repository follows the conventional *src/* layout, making the package self‑contained.
+* All production code lives under `src/system_monitor`; the test suite is placed in the top‑level `tests/` directory.
+* `pyproject.toml` uses **hatchling** as the build backend and defines:
+  * Project metadata (name, version, description, required Python version).
+  * Runtime dependencies: `fastmcp` and `psutil`.
+  * A console‑script entry point `system-monitor` that maps to `system_monitor.server:main`.
+* `uv.lock` pins exact versions of dependencies to ensure reproducible installations.
+* The newly added `README.md` provides a concise description of the server, enumerates the monitoring tools it exposes (e.g., `ping`, `get_cpu_usage`, `read_log_file`, etc.), and shows how to run the server locally:
+
+  ```bash
+  pip install -e .
+  python src/system_monitor/server.py
+  ```
+
+* No repository‑structure diagram is present in the README; the layout is documented here instead.
